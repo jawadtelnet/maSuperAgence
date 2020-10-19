@@ -29,32 +29,14 @@ class PropertyController extends AbstractController
      */
     public function index()
     {
-        /*$property = new Property();
-        $property->setTitle('Mon premier bien')
-            ->setDescription('petite description')
-            ->setPrice(200000)
-            ->setRooms(4)
-            ->setBedrooms(1)
-            ->setSurface(60)
-            ->setFloor(4)
-            ->setHeat(1)
-            ->setCity("Paris")
-            ->setAddress("15 rue gambetta")
-            ->setPostalCode("94000");
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($property);
-        $em->flush();*/
+       
         $property = $this->repository->findAllVisibile();
 
 
-        $latest = $this->repository->findLatest();
-        //$this->em->flush();
-        dump($latest);
+        //$latest = $this->repository->findLatest();
+       
 
-
-
-        return $this->render('pages/index.html.twig', ['current_menu' => 'properties']);
+        return $this->render('property/index.html.twig', ['current_menu' => 'properties', 'properties' =>  $property]);
     }
 
     /**
@@ -69,6 +51,6 @@ class PropertyController extends AbstractController
                 'slug' => $property->getSlug()
             ], 301);
         }
-        return $this->render('pages/show.html.twig', ['current_menu' => 'properties', 'property' => $property]);
+        return $this->render('property/show.html.twig', ['current_menu' => 'properties', 'property' => $property]);
     }
 }
